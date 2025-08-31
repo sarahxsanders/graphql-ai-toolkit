@@ -1,4 +1,4 @@
-A practical toolkit for designing GraphQL APIs that work seamlessly with AI-powered development workflows. Created for GraphQLConf 2025.
+_A practical toolkit for designing GraphQL APIs that work seamlessly with AI-powered development workflows. Created for GraphQLConf 2025._
 
 ## The problem
 

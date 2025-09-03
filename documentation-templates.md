@@ -3,7 +3,8 @@
 ```markdown
 # [API Name] GraphQL API
 
-## Quick Start for AI Systems
+## Quick start
+
 This API uses GraphQL with cursor-based pagination, follows Relay specifications, and 
 requires authentication via Bearer tokens.
 
@@ -11,13 +12,15 @@ requires authentication via Bearer tokens.
 **Auth:** Bearer token in Authorization header
 **Rate Limits:** 1000 requests/hour per user
 
-## Core Domain Model
+## Core domain model
+
 - **Users**: Application users with profiles and preferences
 - **Posts**: User-generated content with rich media support  
 - **Comments**: Threaded discussions on posts
 - **Reactions**: Likes, shares, and other engagement actions
 
-## Common Query Patterns
+## Common query patterns
+
 See [Query Patterns](#query-patterns) for complete, working examples of typical use 
 cases.
 ```
@@ -25,14 +28,15 @@ cases.
 ## Query pattern template
 
 ```markdown
-## User Feed Query Pattern
+## User feed query
 
 **Use Case:** Display a user's personalized content feed
 **Performance:** ~100ms average, cacheable for 5 minutes
 **Rate Limit:** 60 requests/hour per user
 **Complexity Score:** 8/10
 
-### Complete Example
+### Query
+
 ```graphql
 query UserFeed($userId: ID!, $first: Int = 10, $after: String) {
   user(id: $userId) {
@@ -64,9 +68,8 @@ query UserFeed($userId: ID!, $first: Int = 10, $after: String) {
     }
   }
 }
-```
 
-## Variables example
+## Variables
 
 ```json
 {
@@ -74,9 +77,8 @@ query UserFeed($userId: ID!, $first: Int = 10, $after: String) {
   "first": 20,
   "after": "cursor_abc123"
 }
-```
 
-## Expected response structure
+## Response
 
 ```json
 {

@@ -77,11 +77,11 @@ Learn more: /docs/pagination-patterns
 
 | Resource | Purpose | Best for |
 |----------|---------|----------|
-| Schema audit checklist | Comprehensive review guide | Making existing schemas AI-friendly |
-| Documentation templates | Structured doc formats | Creating new AI-optimized documentation |
-| Error message templates | Before/after error improvements | Implementing helpful error responses |
-| Query examples | Complete code samples | Providing AI with working patterns to copy |
-| MCP integration | Model Context Protocol setup | Connecting GraphQL APIs to AI tools |
+| Schema audit checklist | Comprehensive review guide |
+| Documentation templates | Structured doc formats |
+| Error message templates | Before/after error improvements |
+| Query examples | Complete code samples |
+| MCP integration | Model Context Protocol setup |
 | [Docker State of Application Development Report](https://www.docker.com/blog/2025-docker-state-of-app-dev/) | Read insights from thousands of developers |
 | [Docker MCP Catalog and Toolkit](https://docs.docker.com/ai/mcp-catalog-and-toolkit/) | Learn about Docker's MCP product offerings |
 

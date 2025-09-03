@@ -1,3 +1,5 @@
+# GraphQL documentation templates
+
 Use the following templates as a starting point for creating AI-ready GraphQL documentation. These templates are intended to be getting started
 suggestions, and not prescribed best practices for every use case.
 

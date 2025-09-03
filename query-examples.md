@@ -449,13 +449,13 @@ If AI struggles or generates incorrect queries, your examples need more context.
 
 For each query example, ensure you have:
 
-- [] Clear use case description
-- [] Complete, named operation
-- [] All variables with realistic values
-- [] Enough fields to be useful
-- [] Expected response structure
-- [] Performance/caching context
-- [] Error scenarios (for mutations)
-- [] Related query references
+- [ ] Clear use case description
+- [ ] Complete, named operation
+- [ ] All variables with realistic values
+- [ ] Enough fields to be useful
+- [ ] Expected response structure
+- [ ] Performance/caching context
+- [ ] Error scenarios (for mutations)
+- [ ] Related query references
 
 After reading your example, AI should be able to generate correct, similar queries for related use cases.

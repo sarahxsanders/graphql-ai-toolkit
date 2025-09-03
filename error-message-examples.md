@@ -65,9 +65,7 @@ Valid examples:
 first: 10 (recommended for most use cases)
 first: 50 (maximum allowed value)
 
-Common mistake: Don't use quotes around numbers in GraphQL
-❌ first: "10"
-✅ first: 10
+Common mistake: Don't use quotes around numbers in GraphQL (first: "10" vs. first: 10)
 ```
 
 ## Missing required field error example
@@ -103,10 +101,89 @@ This usually happens with recursive relationships like:
 post > author > posts > author > posts...
 
 Solutions:
-
 1. Use fragments to structure your query
 2. Fetch data in multiple requests
 3. Use our pre-built query patterns: /docs/query-patterns
 
 Query depth calculator: /tools/depth-calculator
+```
+
+## Query complexity limits
+
+```
+Query exceeds complexity limit (cost: 245, maximum: 200).
+
+Expensive fields in your query:
+- user.posts: 50 points (consider using first: 5 instead of first: 20)
+- posts.comments: 120 points (consider removing or paginating)
+
+Optimization tips:
+1. Reduce pagination sizes (first/last arguments)
+2. Remove expensive nested fields
+3. Use our query cost calculator: /tools/query-cost
+
+Query optimization guide: /docs/performance
+```
+
+## Unknown field errors
+
+```
+Cannot query field "authorName" on type "Post".
+
+Did you mean one of these?
+- author { name }
+- author { displayName }
+
+Available fields on Post:
+- id, title, content, createdAt
+- author (returns User type)
+- tags (returns [String])
+
+Schema explorer: /docs/schema/post
+```
+
+## Enum validation errors
+
+```
+Value "DESCENDING" is not valid for enum "SortOrder".
+
+Valid options:
+- ASC (ascending order)
+- DESC (descending order)
+
+Example: posts(orderBy: { createdAt: DESC })
+Sorting guide: /docs/sorting
+```
+
+## Input object validation errors
+
+```
+Field "CreatePostInput.publishedAt" expected type "DateTime" but got "2025-13-45".
+
+DateTime format: ISO 8601 (YYYY-MM-DDTHH:MM:SSZ)
+Valid example: "2025-03-15T10:30:00Z"
+
+Common mistakes:
+❌ "2025-13-45" (invalid month/day)
+❌ "March 15, 2025" (wrong format)
+✅ "2025-03-15T10:30:00Z" (correct format)
+
+DateTime formatting guide: /docs/datetime
+```
+
+## Permission/authorization errors
+
+```
+You don't have permission to access field "User.email".
+
+This field requires:
+- Role: ADMIN or USER_MANAGER
+- Scope: "user:email:read"
+
+Your current permissions:
+- Role: USER
+- Scopes: "user:profile:read", "posts:read"
+
+Permissions guide: /docs/authorization
+Contact your admin to request additional permissions.
 ```

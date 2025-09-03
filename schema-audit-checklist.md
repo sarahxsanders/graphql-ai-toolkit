@@ -1,3 +1,5 @@
+Use the following checklists to audit your GraphQL schema for AI-readiness.
+
 ## Type-level audit
 
 - [ ]  Every type has a description explaining what it represents

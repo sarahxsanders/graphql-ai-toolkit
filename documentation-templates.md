@@ -1,7 +1,7 @@
 ## API overview template
 
 ```markdown
-# [API Name] GraphQL API
+# [API name] GraphQL API
 
 ## Quick start
 

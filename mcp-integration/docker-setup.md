@@ -307,28 +307,6 @@ To share your GraphQL MCP server with the community:
    - Discovery in Docker MCP Catalog
    - Access to millions of developers
 
-## Troubleshoot
-
-### Common issues
-
-Server not appearing in Docker MCP Toolkit:
-
-- Verify container is running: `docker ps`
-- Check logs for startup errors: `docker logs container-name`
-- Ensure MCP Toolkit is enabled in Docker Desktop
-
-GraphQL connection failures:
-
-- Test endpoint accessibility from container: `docker exec container-name curl endpoint`
-- Verify environment variables: `docker exec container-name env | grep GRAPHQL`
-- Check authentication credentials and format
-
-AI client not connecting:
-
-- Restart AI client after connecting through Docker MCP Toolkit
-- Verify MCP configuration files were created correctly
-- Check Docker MCP Toolkit gateway is running
-
 ## More resources
 
 - Docker MCP documentation: [docs.docker.com/ai/mcp-catalog-and-toolkit/](https://docs.docker.com/ai/mcp-catalog-and-toolkit/)

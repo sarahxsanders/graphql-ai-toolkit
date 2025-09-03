@@ -82,6 +82,8 @@ Learn more: /docs/pagination-patterns
 | Error message templates | Before/after error improvements | Implementing helpful error responses |
 | Query examples | Complete code samples | Providing AI with working patterns to copy |
 | MCP integration | Model Context Protocol setup | Connecting GraphQL APIs to AI tools |
+| [Docker State of Application Development Report](https://www.docker.com/blog/2025-docker-state-of-app-dev/) | Read insights from thousands of developers |
+| [Docker MCP Catalog and Toolkit](https://docs.docker.com/ai/mcp-catalog-and-toolkit/) | Learn about Docker's MCP product offerings |
 
 ## Model Context Protocol (MCP)
 

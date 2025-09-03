@@ -48,7 +48,7 @@
 
 ## AI-specific checks
 
-- [ ]  Run schema through ChatGPT/Claude: Can it explain your API correctly?
+- [ ]  Run schema through several models: Can it explain your API correctly?
 - [ ]  Test query generation: Ask AI to generate queries for common use cases.
 - [ ]  Check for ambiguity: Are there any fields that could be interpreted multiple ways?
 - [ ]  Verify examples work: Check that all embedded code samples are syntactically correct.

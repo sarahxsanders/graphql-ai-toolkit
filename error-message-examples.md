@@ -1,3 +1,7 @@
+# AI-friendly GraphQL error messages
+
+Use the following error message examples to write AI-friendly GraphQL error messages.
+
 ## Authentication errors
 
 ```json

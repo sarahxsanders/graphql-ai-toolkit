@@ -2,15 +2,18 @@ _A practical toolkit for designing GraphQL APIs, documentation, and developer to
 
 ## Quick start
 
-- Audit your schema -> Schema audit checklist
-- Improve your docs -> Documentation templates
-- Fix your errors -> Error message examples
-- Add code examples -> Query examples
-- Connect with AI -> MCP integration guide
+- Audit your schema -> [Schema audit checklist](schema-audit-checklist.md)
+- Improve your docs -> [Documentation templates](documentation-templates.md)
+- Fix your errors -> [Error message examples](error-message-examples.md)
+- Add code examples -> [Query examples](query-examples.md)
+- Connect with AI -> [MCP integration guide](mcp-integration\basic-server.md)
 
-## The three layers
+## The methodology
 
-### 1. Self-explanatory schemas
+To make your GraphQL API, documentation, and developer tooling AI-ready, use the following
+guidelines.
+
+### Self-explanatory schemas
 
 Transform your schema from technically correct to AI-readable:
 
@@ -38,7 +41,7 @@ type User {
 }
 ```
 
-### 2. Context-rich documentation
+### Context-rich documentation
 
 Structure docs for AI comprehension with complete, working examples:
 
@@ -47,7 +50,7 @@ Structure docs for AI comprehension with complete, working examples:
 - Expected response examples
 - Common mistake examples
 
-### 3. Intelligent error messages
+### Intelligent error messages
 
 Turn every error into a teaching moment:
 
@@ -63,18 +66,6 @@ Example: posts(first: 10, after: "cursor123")
 Learn more: /docs/pagination-patterns
 ```
 
-## Resources
-
-| Resource | Purpose | Best for |
-|----------|---------|----------|
-| Schema audit checklist | Comprehensive review guide |
-| Documentation templates | Structured doc formats |
-| Error message templates | Before/after error improvements |
-| Query examples | Complete code samples |
-| MCP integration | Model Context Protocol setup |
-| [Docker State of Application Development Report](https://www.docker.com/blog/2025-docker-state-of-app-dev/) | Read insights from thousands of developers |
-| [Docker MCP Catalog and Toolkit](https://docs.docker.com/ai/mcp-catalog-and-toolkit/) | Learn about Docker's MCP product offerings |
-
 ## Model Context Protocol (MCP)
 
 The future of AI-API integration is here. GraphQL's typed schema and introspection make
@@ -82,18 +73,23 @@ it a natural fit for Model Context Protocol.
 
 ### Example MCP + GraphQL workflow
 
-1. Developer asks Claude: "Check if my user feed is optimal"
-2. AI introspects your GraphQL schema
-3. AI validates query structure and suggests improvements
-4. Developer ships optimized code
+1. Developer asks Claude: "Check if my user feed is optimal".
+2. AI introspects your GraphQL schema.
+3. AI validates query structure and suggests improvements.
+4. Developer ships optimized code.
+
+## Additional resources
+
+- [Docker State of Application Development Report](https://www.docker.com/blog/2025-docker-state-of-app-dev/): Read developer experience insights from thousands of surveys devleopers
+- [Docker MCP Catalog and Toolkit](https://docs.docker.com/ai/mcp-catalog-and-toolkit/): Learn about Docker's MCP product offerings
 
 ## Contribute
 
 Found a pattern that works well with AI? Have examples of AI-friendly GraphQL designs? We'd love your contributions!
 
-1. Fork this repository
-2. Add your examples or improvements
-3. Submit a pull request
+1. Fork this repository.
+2. Add your examples or improvements.
+3. Submit a pull request.
 
 ## About
 

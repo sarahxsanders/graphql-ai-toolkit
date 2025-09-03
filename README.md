@@ -1,14 +1,4 @@
-_A practical toolkit for designing GraphQL APIs that work seamlessly with AI-powered development workflows. Created for GraphQLConf 2025._
-
-## The problem
-
-75% of developers now use AI tools (up from 46% last year), but most GraphQL APIs aren't
-designed for AI consumers. The result? Frustrated developers with "almost right" AI-generated queries
-that fail on first attempt.
-
-The new developer workflow: Ask AI -> Generate -> Iterate -> Ship
-
-Your GraphQL API should support this reality.
+_A practical toolkit for designing GraphQL APIs, documentation, and developer tooling that work seamlessly with AI-powered development workflows. Created for GraphQLConf 2025._
 
 ## Quick start
 

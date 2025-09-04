@@ -4,7 +4,7 @@ Guidelines for creating AI-friendly documentation with complete, working example
 
 ## The problem
 
-Most GraphQL docs show schema fragments without context:
+Schema fragments as query examples don't show context:
 
 ```graphql
 type User {
@@ -12,7 +12,7 @@ type User {
 }
 ```
 
-But AI benefits from complete, working examples with context to generate correct
+AI benefits from complete, working examples with context to generate correct
 queries.
 
 ## Query example template

@@ -4,6 +4,13 @@ Use the following error message examples to write AI-friendly GraphQL error mess
 
 ## Authentication errors
 
+AI optimizations: 
+
+- Explicit solution with exact syntax (`Authorization: Bearer YOUR_TOKEN`)
+- Machine-readable error code for categorization
+- Direct link to relevant documentation
+- Concise yet complete information
+
 ```json
 {
   "errors": [{
@@ -18,6 +25,13 @@ Use the following error message examples to write AI-friendly GraphQL error mess
 ```
 
 ## Validation errors
+
+AI optimizations:
+
+- Clear boundaries (1-100) that AI can use for automatic correction
+- Specific field identification for targeted fixes
+- Practical example with recommended value
+- Contextual documentation link
 
 ```json
 {
@@ -35,6 +49,12 @@ Use the following error message examples to write AI-friendly GraphQL error mess
 
 ## Rate limiting
 
+AI optimizations:
+
+- Parseable ISO timestamp for automated scheduling
+- Actionable algorithmic suggestion (exponential backoff)
+- Clear state information for retry logic
+
 ```json
 {
   "errors": [{
@@ -50,6 +70,13 @@ Use the following error message examples to write AI-friendly GraphQL error mess
 
 ## Invalid argument error example
 
+AI optimizations:
+
+- "Did you mean" suggestion for immediate correction
+- Complete working example with sample values
+- Full argument inventory with type information
+- Explains the underlying pattern (cursor-based pagination)
+
 ```
 Unknown argument "limit" on field "posts".
 Did you mean "first"? This field uses cursor-based pagination.
@@ -62,6 +89,12 @@ Available arguments: first (Int), after (String), orderBy (PostOrderBy)
 
 ## Type mismatch error example
 
+AI optimization:
+
+- Multiple valid examples with use-case annotations
+- Explicit anti-pattern explanation (quotes around numbers)
+- Recommended values for different scenarios
+
 ```
 Field "first" expects an integer, but received string "abc".
 Valid examples:
@@ -73,6 +106,12 @@ Common mistake: Don't use quotes around numbers in GraphQL (first: "10" vs. firs
 ```
 
 ## Missing required field error example
+
+AI optimizations:
+
+- Complete, copy-pasteable solution
+- Shows full response structure including error handling
+- Demonstrates the mutation pattern comprehensively
 
 ```
 The "createPost" mutation returns data that must be selected.
@@ -98,6 +137,13 @@ Mutation patterns guide: /docs/mutations
 
 ## Depth limit error example
 
+AI optimizations:
+
+- Explains the root cause with a concrete example
+- Multiple numbered solutions for different scenarios
+- External tool for validation before execution
+- Current vs. maximum values for calibration
+
 ```
 Your query is too deeply nested (depth: 12, maximum: 8).
 
@@ -113,6 +159,13 @@ Query depth calculator: /tools/depth-calculator
 ```
 
 ## Query complexity limits
+
+AI optimizations:
+
+- Quantified cost analysis per field
+- Specific optimization suggestions with numbers
+- Actionable reduction strategies
+- Tool reference for pre-validation
 
 ```
 Query exceeds complexity limit (cost: 245, maximum: 200).
@@ -131,6 +184,13 @@ Query optimization guide: /docs/performance
 
 ## Unknown field errors
 
+AI optimizations:
+
+- Multiple correction suggestions
+- Complete field inventory with type information
+- Shows nested field access pattern
+- Direct schema documentation link
+
 ```
 Cannot query field "authorName" on type "Post".
 
@@ -148,6 +208,12 @@ Schema explorer: /docs/schema/post
 
 ## Enum validation errors
 
+AI optimizations:
+
+- Complete enum inventory with explanations
+- Working example in context
+- Clear value mapping (DESCENDING → DESC)
+
 ```
 Value "DESCENDING" is not valid for enum "SortOrder".
 
@@ -161,6 +227,13 @@ Sorting guide: /docs/sorting
 
 ## Input object validation errors
 
+AI optimizations:
+
+- Exact format specification (ISO 8601)
+- Multiple failure examples with explanations
+- Clear success example
+- Visual indicators (✓/✗) for quick scanning
+
 ```
 Field "CreatePostInput.publishedAt" expected type "DateTime" but got "2025-13-45".
 
@@ -168,14 +241,21 @@ DateTime format: ISO 8601 (YYYY-MM-DDTHH:MM:SSZ)
 Valid example: "2025-03-15T10:30:00Z"
 
 Common mistakes:
-❌ "2025-13-45" (invalid month/day)
-❌ "March 15, 2025" (wrong format)
-✅ "2025-03-15T10:30:00Z" (correct format)
+✗ "2025-13-45" (invalid month/day)
+✗ "March 15, 2025" (wrong format)
+✓ "2025-03-15T10:30:00Z" (correct format)
 
 DateTime formatting guide: /docs/datetime
 ```
 
 ## Permission/authorization errors
+
+AI optimizations:
+
+- Clear permission requirements
+- Current permission state for comparison
+- Actionable next steps
+- Structured role and scope information
 
 ```
 You don't have permission to access field "User.email".

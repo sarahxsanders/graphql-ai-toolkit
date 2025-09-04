@@ -3,6 +3,11 @@
 Use the following templates as a starting point for creating AI-ready GraphQL documentation. These templates are intended to be getting started
 suggestions, and not prescribed best practices for every use case.
 
+## Table of contents
+
+- [API overview template](#api-overview-template)
+- [Query pattern template](#query-pattern-template)
+
 ## API overview template
 
 For your API overviews:

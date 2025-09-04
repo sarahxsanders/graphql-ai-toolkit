@@ -3,6 +3,17 @@
 Connect your GraphQL MCP server to popular AI clients 
 and development tools to enable intelligent interactions with your GraphQL API.
 
+## Table of contents
+
+- [Prerequisites](#prerequisites)
+- [Overview](#overview)
+- [Claude Desktop](#claude-desktop)
+- [VS Code with agent mode](#vs-code-with-agent-mode)
+- [Cursor editor](#cursor-editor)
+- [Continue.dev extension](#continuedev-extension)
+- [Custom MCP client integration](#custom-mcp-client-integration)
+- [Testing Your AI tool integration](#testing-your-ai-tool-integration)
+
 ## Prerequisites
 
 - Completed GraphQL MCP server from the [basic server guide](basic-server.md)

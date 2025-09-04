@@ -65,12 +65,12 @@ Example: posts(first: 10, after: "cursor123")
 Learn more: /docs/pagination-patterns
 ```
 
-## Model Context Protocol (MCP)
+### Model Context Protocol (MCP)
 
 The future of AI-API integration is here. GraphQL's typed schema and introspection make
 it a natural fit for Model Context Protocol.
 
-### Example MCP + GraphQL workflow
+#### Example MCP + GraphQL workflow
 
 1. Developer asks Claude: "Check if my user feed is optimal".
 2. AI introspects your GraphQL schema.

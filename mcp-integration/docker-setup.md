@@ -1,6 +1,20 @@
-# Docker MCP Setup for GraphQL servers
+# Docker MCP setup for GraphQL servers
 
 Use Docker MCP Toolkit to containerize, test, and deploy your GraphQL MCP servers with enhanced security and easier distribution.
+
+## Table of contents
+
+- [When to use Docker for your GraphQL MCP server](#when-to-use-docker-for-your-graphql-mcp-server)
+- [Prerequisites](#prerequisites)
+- [Enable Docker MCP Toolkit](#enable-docker-mcp-toolkit)
+- [Containerize your GraphQL MCP server](#containerize-your-graphql-mcp-server)
+- [Run with Docker MCP toolkit](#run-with-docker-mcp-toolkit)
+- [Connect to AI clients](#connect-to-ai-clients)
+- [Test Your GraphQL tools](#test-your-graphql-tools)
+- [Environment configuration](#environment-configuration)
+- [Debug and monitor](#debug-and-monitor)
+- [Publishing (Optional)](#publishing-optional)
+- [More resources](#more-resources)
 
 ## When to use Docker for your GraphQL MCP server
 

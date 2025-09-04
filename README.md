@@ -82,13 +82,22 @@ it a natural fit for Model Context Protocol.
 - [Docker State of Application Development Report](https://www.docker.com/blog/2025-docker-state-of-app-dev/): Read developer experience insights from thousands of surveys devleopers
 - [Docker MCP Catalog and Toolkit](https://docs.docker.com/ai/mcp-catalog-and-toolkit/): Learn about Docker's MCP product offerings
 
-## Contribute
+## Have feedback?
 
-Found a pattern that works well with AI? Have examples of AI-friendly GraphQL designs? We'd love your contributions!
+I'd love to hear from you! If you have suggestions, encounter issues, or want to contribute improvements to the docs in this toolkit:
 
-1. Fork this repository.
-2. Add your examples or improvements.
-3. Submit a pull request.
+- Submit an issue: [Create a new issue](../../issues/new) in this repository
+- Provide feedback: Use the issue title format `[Feedback] Your topic here`
+- Report bugs: Use the issue title format `[Bug] Description of the problem`
+- Request features: Use the issue title format `[Feature Request] Your idea here`
+
+When submitting feedback, please include:
+- The section of the guide you're referencing
+- Your use case or what you're trying to accomplish
+- Any error messages or unexpected behavior
+- Your environment details (if relevant)
+
+Your feedback helps me improve this guide for everyone. Thank you for contributing!
 
 ## About
 

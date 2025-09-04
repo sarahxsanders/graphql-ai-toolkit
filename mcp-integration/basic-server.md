@@ -3,6 +3,19 @@
 Create a simple MCP server that connects your GraphQL
 API to AI tools.
 
+## Table of contents
+
+- [Prerequisites](#prerequisites)
+- [Create project structure](#create-project-structure)
+- [Install dependencies](#install-dependencies)
+- [Create basic server](#create-basic-server)
+- [Add environment configuration](#add-environment-configuration)
+- [Add typescript configuration](#add-typescript-configuration)
+- [Add build scripts](#add-build-scripts)
+- [Test your server](#test-your-server)
+- [Customization options](#customization-options)
+- [Next steps](#next-steps)
+
 ## Prerequisites
 
 - Node.js 18+ installed

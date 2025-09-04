@@ -90,7 +90,7 @@ it a natural fit for Model Context Protocol.
 
 - [Docker State of Application Development Report](https://www.docker.com/blog/2025-docker-state-of-app-dev/): Read developer experience insights from thousands of surveys devleopers
 - [Docker MCP Catalog and Toolkit](https://docs.docker.com/ai/mcp-catalog-and-toolkit/): Learn about Docker's MCP product offerings
-- [Docker setup for GraphQL MCP server] (mcp-integration/mcp-integration/docker-setup.md)
+- [Docker setup for GraphQL MCP server](mcp-integration/mcp-integration/docker-setup.md)
 
 ## Have feedback?
 

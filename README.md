@@ -10,7 +10,7 @@ _A practical toolkit for designing GraphQL APIs, documentation, and developer to
 
 ## The methodology
 
-By creating self-explanatory schemas, context-rich documentation, and better developer tooling, we can better power AI development workflows.
+By creating self-explanatory schemas, context-rich documentation, and better developer tooling, we can create better GraphQL developer experiences.
 
 ### Self-explanatory schemas
 

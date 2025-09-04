@@ -2,11 +2,11 @@ _A practical toolkit for designing GraphQL APIs, documentation, and developer to
 
 ## Quick start
 
-- Audit your schema -> [Schema audit checklist](schema-audit-checklist.md)
-- Improve your docs -> [Documentation templates](documentation-templates.md)
-- Fix your errors -> [Error message examples](error-message-examples.md)
-- Add code examples -> [Query examples](query-examples.md)
-- Connect with AI -> [MCP integration guide](mcp-integration/basic-server.md)
+- [Schema audit checklist](schema-audit-checklist.md)
+- [Documentation templates](documentation-templates.md)
+- [Error message examples](error-message-examples.md)
+- [Query examples](query-examples.md)
+- [MCP integration guide](mcp-integration/basic-server.md)
 
 ## The methodology
 

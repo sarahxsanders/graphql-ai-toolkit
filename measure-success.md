@@ -3,6 +3,13 @@
 A comprehensive guide to tracking and improving how AI agents interact with your 
 GraphQL API through metrics, analytics, and feedback loops.
 
+## Table of contents
+
+- [Why measure AI success with GraphQL](#why-measure-ai-success-with-graphql)
+- [Core success metrics](#core-success-metrics)
+- [Establishing baselines and targets](#establishing-baselines-and-targets)
+- [Continuous improvement process](#continuous-improvement-process)
+
 ## Why measure AI success with GraphQL
 
 Traditional API metrics focus on uptime, response times, and error rates. But when AI agents use your GraphQL API, you need different measurements:

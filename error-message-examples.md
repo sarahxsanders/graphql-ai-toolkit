@@ -2,6 +2,19 @@
 
 Use the following error message examples to write AI-friendly GraphQL error messages.
 
+- [Authentication errors](#authentication-errors)
+- [Validation errors](#validation-errors)
+- [Rate limiting](#rate-limiting)
+- [Invalid argument error example](#invalid-argument-error-example)
+- [Type mismatch error example](#type-mismatch-error-example)
+- [Missing required field error example](#missing-required-field-error-example)
+- [Depth limit error example](#depth-limit-error-example)
+- [Query complexity limits](#query-complexity-limits)
+- [Unknown field errors](#unknown-field-errors)
+- [Enum validation errors](#enum-validation-errors)
+- [Input object validation errors](#input-object-validation-errors)
+- [Permission/authorization errors](#permissionauthorization-errors)
+
 ## Authentication errors
 
 AI optimizations: 

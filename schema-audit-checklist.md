@@ -2,6 +2,17 @@
 
 Use the following checklists to audit your GraphQL schema for AI-readiness.
 
+## Table of contents
+
+- [Type-level audit](#type-level-audit)
+- [Field-level audit](#field-level-audit)
+- [Argument-level audit](#argument-level-audit)
+- [Connection & pagination audit](#connection--pagination-audit)
+- [Custom scalars & enums](#custom-scalars--enums)
+- [Union & interface audit](#union--interface-audit)
+- [Directive audit](#directive-audit)
+- [AI-specific checks](#ai-specific-checks)
+
 ## Type-level audit
 
 - [ ]  Every type has a description explaining what it represents

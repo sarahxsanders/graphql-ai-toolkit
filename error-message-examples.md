@@ -2,6 +2,8 @@
 
 Use the following error message examples to write AI-friendly GraphQL error messages.
 
+## Table of contents
+
 - [Authentication errors](#authentication-errors)
 - [Validation errors](#validation-errors)
 - [Rate limiting](#rate-limiting)

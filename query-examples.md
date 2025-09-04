@@ -2,6 +2,17 @@
 
 Guidelines for creating AI-friendly documentation with complete, working examples.
 
+## Table of contents
+
+- [The problem](#the-problem)
+- [Query example template](#query-example-template)
+- [Example: Before vs. after](#example-before-vs-after)
+- [Key principles](#key-principles)
+- [Mutation example structure](#mutation-example-structure)
+- [Document organization tips](#document-organization-tips)
+- [Test your examples](#test-your-examples)
+- [Quick checklist](#quick-checklist)
+
 ## The problem
 
 Schema fragments as query examples don't show context:
@@ -22,7 +33,8 @@ Use this template for query examples in your documentation:
 ### Context header
 
 ```markdown
-### [Query name]
+## [Query name]
+
 **Use case:** [Brief description of when to use this query]
 **Performance:** [Timing and caching info]  
 **Rate limit:** [Any applicable limits]
@@ -32,6 +44,7 @@ Use this template for query examples in your documentation:
 ### Complete query
 
 Always include:
+
 - Realistic operation name
 - All variables with types and defaults
 - Complete field selection
@@ -56,7 +69,6 @@ query YourOperationName($var1: Type!, $var2: Type = defaultValue) {
 ### Variables section
 
 ```markdown
-**Variables:**
 ```json
 {
   "var1": "realistic_example_value",
@@ -67,7 +79,6 @@ query YourOperationName($var1: Type!, $var2: Type = defaultValue) {
 ### Response
 
 ```markdown
-**Response:**
 ```json
 {
   "data": {
@@ -81,7 +92,6 @@ query YourOperationName($var1: Type!, $var2: Type = defaultValue) {
 ### Error examples (if needed)
 
 ```markdown
-**Common errors:**
 ```json
 {
   "errors": [{

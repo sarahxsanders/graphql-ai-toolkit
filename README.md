@@ -10,8 +10,7 @@ _A practical toolkit for designing GraphQL APIs, documentation, and developer to
 
 ## The methodology
 
-To make your GraphQL API, documentation, and developer tooling AI-ready, use the following
-guidelines.
+By creating self-explanatory schemas, context-rich documentation, and better developer tooling, we can better power AI development workflows.
 
 ### Self-explanatory schemas
 

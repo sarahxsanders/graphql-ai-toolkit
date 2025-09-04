@@ -5,6 +5,14 @@ suggestions, and not prescribed best practices for every use case.
 
 ## API overview template
 
+For your API overviews:
+
+- Start with a 'Quick start' page that explains the very basics of your API.
+- Then explain your domain model: what entities exist and how they are used/relate.
+- Link to common query patterns. This can be a query pattern library, a few high-quality example queries, or a link to other use case guides with queries embedded in them.
+
+Example:
+
 ```markdown
 # [API name] GraphQL API
 
@@ -17,7 +25,7 @@ requires authentication via Bearer tokens.
 **Auth:** Bearer token in Authorization header
 **Rate Limits:** 1000 requests/hour per user
 
-## Core domain model
+## Domain model
 
 - **Users**: Application users with profiles and preferences
 - **Posts**: User-generated content with rich media support  
@@ -31,6 +39,16 @@ cases.
 ```
 
 ## Query pattern template
+
+When providing query examples, outline the query's:
+
+- Use case
+- Performance implications
+- Rate limit implications
+- Complexity score
+- Full query, variable example, and response example
+
+Example:
 
 ```markdown
 ## User feed query
@@ -74,7 +92,7 @@ query UserFeed($userId: ID!, $first: Int = 10, $after: String) {
   }
 }
 
-## Variables
+### Variables
 
 ```json
 {
@@ -83,7 +101,7 @@ query UserFeed($userId: ID!, $first: Int = 10, $after: String) {
   "after": "cursor_abc123"
 }
 
-## Response
+### Response
 
 ```json
 {
@@ -102,20 +120,3 @@ query UserFeed($userId: ID!, $first: Int = 10, $after: String) {
   }
 }
 ```
-
-## Performance notes
-
-- Use fragments for repeated user information
-- Limit first parameter to 50 for optimal performance
-- Consider using `reactions { totalCount }` instead of full reaction details for list views
-
-## Common mistakes
-
-### Don’t do this
-
-- `feed(limit: 100)`: this API uses cursor pagination, not limit/offset
-- Query without pageInfo: you'll lose pagination context
-
-### Do this
-
-- Always include pageInfo for proper pagination handling

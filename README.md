@@ -65,6 +65,15 @@ Example: posts(first: 10, after: "cursor123")
 Learn more: /docs/pagination-patterns
 ```
 
+### Enhance GraphiQL
+
+Your GraphiQL instance might need a makeover! 
+
+- Natural language queries: Add an input bar that converts "show me all users with recent posts" into proper GraphQL syntax. This lets developers think in outcomes, not query language.
+- Performance warnings: Show real-time feedback like "this query hits 500+ records" or "complexity: 127/100" directly in the editor. Catch expensive operations before they hit production.
+- Copy as curl/fetch: One-click export to executable code formats that AI tools can immediately use.
+- Mock data generation: Generate realistic responses from any query without hitting your backend. This can help AI understand response shapes and enables offline development.
+
 ### Model Context Protocol (MCP)
 
 The future of AI-API integration is here. GraphQL's typed schema and introspection make

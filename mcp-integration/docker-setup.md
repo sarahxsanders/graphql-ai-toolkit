@@ -1,328 +1,340 @@
-# Docker MCP setup for GraphQL servers
+# Docker setup for GraphQL MCP servers
 
-Use Docker MCP Toolkit to containerize, test, and deploy your GraphQL MCP servers with enhanced security and easier distribution.
+Connect your GraphQL API to AI tools using Docker's MCP infrastructure, a fast path from API to AI-powered automation.
 
 ## Table of contents
 
-- [When to use Docker for your GraphQL MCP server](#when-to-use-docker-for-your-graphql-mcp-server)
-- [Prerequisites](#prerequisites)
-- [Enable Docker MCP Toolkit](#enable-docker-mcp-toolkit)
-- [Containerize your GraphQL MCP server](#containerize-your-graphql-mcp-server)
-- [Run with Docker MCP toolkit](#run-with-docker-mcp-toolkit)
-- [Connect to AI clients](#connect-to-ai-clients)
-- [Test Your GraphQL tools](#test-your-graphql-tools)
-- [Environment configuration](#environment-configuration)
-- [Debug and monitor](#debug-and-monitor)
-- [Publishing (Optional)](#publishing-optional)
-- [More resources](#more-resources)
+- [Why Docker for GraphQL MCP](#why-docker-for-graphql-mcp)
+- [Quick start with MCP gateway](#quick-start-with-mcp-gateway)
+- [Containerize your GraphQL server](#containerize-your-graphql-server)
+- [Connect to the MCP gateway](#connect-to-the-mcp-gateway)
+- [Test with AI clients](#test-with-ai-clients)
+- [Contribute to MCP registry](#contribute-to-mcp-registry)
+- [Production deployment](#production-deployment)
+- [Resources](#resources)
 
-## When to use Docker for your GraphQL MCP server
+## Why Docker for GraphQL MCP
 
-Consider Docker when you need:
+The [Docker MCP gateway](https://github.com/docker/mcp-gateway) provides the infrastructure you need to connect GraphQL APIs to AI tools:
 
-- Easy distribution: Share your MCP server with others without dependency issues
-- Isolated testing: Run multiple GraphQL MCP servers without conflicts
-- Production deployment: Deploy securely with built-in resource limits
-- AI client integration: Connect to Claude Desktop, VS Code, and other MCP clients through a unified gateway
+- **Unified access point**: Connect multiple GraphQL endpoints through a single gateway
+- **Zero configuration for clients**: AI tools like Claude, Cursor, and VS Code connect once to access all your APIs
+- **Community ecosystem**: Discover GraphQL MCP servers in the [MCP registry](https://github.com/docker/mcp-registry)
+- **Security by default**: Containers provide isolation, resource limits, and credential management
 
-## Prerequisites
+## Quick start with MCP gateway
 
-- Docker Desktop 4.45.0+ with MCP Toolkit enabled
-- Your GraphQL MCP server
-- AI client for testing
+### Clone and run the gateway
 
-## Enable Docker MCP Toolkit
+```bash
+# Get the MCP gateway
+git clone https://github.com/docker/mcp-gateway
+cd mcp-gateway
 
-1. Update Docker Desktop to version 4.45.0 or later
-2. Enable MCP Toolkit:
-   - Open Docker Desktop Settings
-   - Navigate to Beta features  
-   - Enable "Docker MCP Toolkit"
-   - Apply changes and restart Docker Desktop
-3. Verify: Look for "MCP Toolkit" in Docker Desktop's sidebar
+# Start the gateway
+docker compose up -d
 
-## Containerize your GraphQL MCP server
+# Verify it's running
+docker compose logs gateway
+```
+
+The gateway is now ready to manage your GraphQL MCP servers.
+
+### Add your GraphQL server
+
+The gateway can run any MCP server from the catalog. Try the GitHub GraphQL server:
+
+```
+# Pull an existing GraphQL MCP server from the catalog
+docker pull mcp/github:latest
+
+# Or use your own GraphQL server (see next section)
+docker pull your-username/your-graphql-mcp:latest
+```
+
+## Containerize your GraphQL server
+
+### Create your MCP server
+
+First, ensure your GraphQL server implements the MCP protocol. Here's a minimal example:
+
+```typescript
+// src/server.ts
+import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { GraphQLClient } from 'graphql-request';
+
+const server = new Server(
+  {
+    name: 'my-graphql-mcp',
+    version: '1.0.0',
+  },
+  {
+    capabilities: {
+      tools: {},
+    },
+  }
+);
+
+// Define GraphQL tools
+server.setRequestHandler(ListToolsRequestSchema, async () => {
+  return {
+    tools: [
+      {
+        name: 'execute_query',
+        description: 'Execute a GraphQL query',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            query: { type: 'string' },
+            variables: { type: 'object' },
+          },
+          required: ['query'],
+        },
+      },
+    ],
+  };
+});
+
+const transport = new StdioServerTransport();
+server.connect(transport);
+```
 
 ### Create Dockerfile
 
-In your existing GraphQL MCP server project, create a `Dockerfile`:
-
-```dockerfile
+```
 FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files
+# Copy and install dependencies
 COPY package*.json ./
-
-# Install dependencies
 RUN npm ci --only=production
 
-# Copy TypeScript config and source
-COPY tsconfig.json ./
-COPY src/ ./src/
+# Copy source
+COPY . .
 
-# Build TypeScript
+# Build if using TypeScript
 RUN npm run build
 
-# Create non-root user for security
-RUN addgroup -g 1001 -S mcp && \
-    adduser -S mcpuser -u 1001 -G mcp
+# Security: Run as non-root
+USER node
 
-# Switch to non-root user
-USER mcpuser
-
-# Health check (optional)
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD node -e "console.log('Server healthy')" || exit 1
-
-# Start MCP server
-CMD ["npm", "start"]
+# MCP servers use stdio transport
+CMD ["node", "dist/server.js"]
 ```
 
-### Build container image
+### Build and test
 
 ```bash
-# Build your GraphQL MCP server image
+# Build your image
 docker build -t my-graphql-mcp .
+
+# Test locally
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | \
+  docker run -i my-graphql-mcp
 ```
 
-## Run with Docker MCP toolkit
+## Connect to the MCP gateway
 
-### Option A: Run directly with Docker
+### Configure the gateway
+
+Add your GraphQL server to the gateway's configuration:
+
+```yaml
+# mcp-gateway/config/servers.yaml
+servers:
+  - name: my-graphql-api
+    image: my-graphql-mcp:latest
+    env:
+      GRAPHQL_ENDPOINT: https://api.example.com/graphql
+      AUTH_TOKEN: ${GRAPHQL_TOKEN}
+    
+  # Add multiple GraphQL endpoints
+  - name: github-graphql
+    image: mcp/github:latest
+    env:
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      
+  - name: shopify-graphql
+    image: my-shopify-mcp:latest
+    env:
+      SHOP_DOMAIN: myshop.myshopify.com
+      API_TOKEN: ${SHOPIFY_TOKEN}
+```
+
+### Restart the gateway
 
 ```bash
-# Run your containerized GraphQL MCP server
-docker run -d \
-  --name my-graphql-mcp \
-  -e GRAPHQL_ENDPOINT=https://api.yourdomain.com/graphql \
-  -e AUTH_TOKEN=your_token_here \
-  my-graphql-mcp
-
-# Test the server
-docker logs my-graphql-mcp
+cd mcp-gateway
+docker compose restart
 ```
 
-### Option B: Use Docker MCP Toolkit gateway
+Your GraphQL servers are now available through the gateway!
 
-The Docker MCP Toolkit acts as a gateway, allowing you to manage multiple MCP servers and connect them to AI clients easily.
-
-1. Add your server to the toolkit:
-
-   ```bash
-   # Using Docker MCP CLI (if available)
-   docker mcp server add my-graphql-mcp
-   ```
-
-2. Or manage through Docker Desktop:
-
-   - Open Docker Desktop → MCP Toolkit
-   - Your running server should appear in the local servers section
-   - Configure environment variables through the UI
-
-## Connect to AI clients
-
-### Connect Claude Desktop
-
-1. Open Docker Desktop → MCP Toolkit → Clients tab
-2. Find Claude Desktop in the client list
-3. Click "Connect". This automatically configures Claude's MCP settings
-4. Restart Claude Desktop to load the new configuration
-
-Your Claude Desktop will now have access to your GraphQL MCP server tools through the Docker gateway.
-
-### Connect VS Code
-
-1. Create MCP configuration in your project:
-
-   ```bash
-   # Initialize MCP for VS Code
-   docker mcp init vscode
-   ```
-
-2. This creates `.vscode/mcp.json`:
-
-   ```json
-   {
-     "mcp": {
-       "servers": {
-         "MCP_DOCKER": {
-           "command": "docker",
-           "args": ["mcp", "gateway", "run"],
-           "type": "stdio"
-         }
-       }
-     }
-   }
-   ```
-
-3. Open VS Code in your project and use Agent mode to interact with your GraphQL tools
-
-### Connect other clients
-
-Docker MCP Toolkit supports:
-
-- Cursor: Similar to VS Code setup
-- Continue.dev: Automatic detection through the gateway
-- Gordon: Built-in client in Docker Desktop
-
-## Test Your GraphQL tools
+## Test with AI clients
 
 ### Claude Desktop
 
-Ask Claude to interact with your GraphQL API:
+The gateway automatically configures Claude Desktop:
 
-- "Introspect the GraphQL schema and show me available queries"
-- "Execute a query to get user information for ID 123"  
-- "Validate this GraphQL query: `query { users { name email } }`"
-- "Analyze the complexity of this query and suggest optimizations"
+```json
+{
+  "mcpServers": {
+    "docker-gateway": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "mcp-gateway"],
+      "env": {
+        "GATEWAY_URL": "http://localhost:8080"
+      }
+    }
+  }
+}
+```
 
-### VS Code agent mode
+Test it with the following prompts:
 
-In VS Code, open a chat and select Agent mode, then:
+- "Use my GraphQL API to fetch user data"
+- "Execute a mutation to create a new post"
+- "Show me the schema for my GraphQL endpoint"
 
-- "Use the GraphQL server to show me the API schema"
-- "Execute a GraphQL mutation to create a new user"
-- "Help me write an optimized query for the product catalog"
+### VS Code
 
-## Environment configuration
+Enable in VS Code settings:
 
-### Using Docker Compose (Recommended)
+```
+{
+  "mcp": {
+    "servers": {
+      "docker-gateway": {
+        "command": "docker",
+        "args": ["mcp", "gateway", "run"],
+        "type": "stdio"
+      }
+    }
+  }
+}
+```
 
-Create `docker-compose.yml`:
+## Contribute to MCP registry
+
+Share your GraphQL MCP server with the community through the [Docker MCP registry](https://github.com/docker/mcp-registry).
+
+### Prepare your server
+
+Ensure your GraphQL MCP server:
+
+- Has comprehensive tool descriptions
+- Includes error handling with AI-friendly messages
+- Supports common GraphQL patterns (introspection, pagination, mutations)
+- Has a clear README with examples
+
+### Submit to registry
+
+```bash
+# Fork the registry
+git clone https://github.com/docker/mcp-registry
+cd mcp-registry
+
+# Create your server definition
+mkdir servers/graphql/your-api
+```
+
+Create `servers/graphql/your-api/metadata.yaml`:
+
+```
+name: your-graphql-api
+namespace: community  # or 'mcp' if Docker-built
+description: MCP server for YourAPI GraphQL endpoint
+image: docker.io/yourusername/your-graphql-mcp
+categories:
+  - graphql
+  - api
+  - developer-tools
+tools:
+  - name: execute_query
+    description: Execute GraphQL queries
+  - name: introspect_schema
+    description: Get the complete GraphQL schema
+  - name: analyze_complexity
+    description: Analyze query performance
+configuration:
+  - name: GRAPHQL_ENDPOINT
+    description: Your GraphQL API endpoint
+    required: true
+  - name: AUTH_TOKEN
+    description: Authentication token
+    required: false
+    secret: true
+```
+
+### Submit pull request
+
+```bash
+git add .
+git commit -m "Add YourAPI GraphQL MCP server"
+git push origin main
+```
+
+Once approved, your server will be available:
+
+- In Docker Hub under `mcp/your-graphql-api` (if Docker-built)
+- In Docker Desktop's MCP Toolkit
+- To millions of developers worldwide
+
+## Production deployment
+
+### Use Docker Compose
 
 ```yaml
 version: '3.8'
 
 services:
+  mcp-gateway:
+    image: docker/mcp-gateway:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config:/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - LOG_LEVEL=info
+      
   graphql-mcp:
-    build: .
-    container_name: my-graphql-mcp
+    image: my-graphql-mcp:latest
     environment:
       - GRAPHQL_ENDPOINT=${GRAPHQL_ENDPOINT}
-      - AUTH_TOKEN=${AUTH_TOKEN}
-      - SERVER_NAME=my-graphql-api
-    restart: unless-stopped
-    networks:
-      - mcp-network
-
-networks:
-  mcp-network:
-    driver: bridge
-```
-
-Create `.env`:
-
-```bash
-GRAPHQL_ENDPOINT=https://api.yourdomain.com/graphql
-AUTH_TOKEN=your_api_token_here
-```
-
-Run with:
-
-```bash
-docker-compose up -d
-```
-
-### Using Docker secrets (Production)
-
-For sensitive credentials:
-
-```bash
-# Create secrets
-echo "your_api_token" | docker secret create graphql_token -
-
-# Update docker-compose.yml
-services:
-  graphql-mcp:
-    build: .
-    environment:
-      - GRAPHQL_ENDPOINT=https://api.yourdomain.com/graphql
-      - AUTH_TOKEN_FILE=/run/secrets/graphql_token
     secrets:
       - graphql_token
-
+    restart: unless-stopped
+    
 secrets:
   graphql_token:
-    external: true
+    file: ./secrets/token.txt
 ```
 
-Update your server code to read from file:
+### Monitor and debug
 
-```typescript
-const AUTH_TOKEN = process.env.AUTH_TOKEN || 
-  (process.env.AUTH_TOKEN_FILE ? 
-    fs.readFileSync(process.env.AUTH_TOKEN_FILE, 'utf8').trim() : 
-    undefined);
 ```
+# View gateway logs
+docker logs mcp-gateway
 
-## Debug and monitor
+# Check connected servers
+curl http://localhost:8080/servers
 
-### View Logs
-
-```bash
-# Container logs
-docker logs my-graphql-mcp
-
-# Follow logs in real-time
-docker logs -f my-graphql-mcp
-
-# Docker Compose logs
-docker-compose logs graphql-mcp
-```
-
-### Resource monitoring
-
-```bash
-# Check resource usage
-docker stats my-graphql-mcp
-
-# Inspect container details
-docker inspect my-graphql-mcp
-```
-
-### Health checks
-
-Test your server health:
-
-```bash
-# Test container health
-docker exec my-graphql-mcp node -e "console.log('Health check passed')"
-
-# Test GraphQL connectivity
-docker exec my-graphql-mcp curl -X POST \
+# Test a specific tool
+curl -X POST http://localhost:8080/execute \
   -H "Content-Type: application/json" \
-  -d '{"query":"{ __typename }"}' \
-  $GRAPHQL_ENDPOINT
+  -d '{"server": "my-graphql-api", "tool": "execute_query", "args": {...}}'
 ```
 
-## Publishing (Optional)
+## Resources
 
-### Submit to Docker MCP Catalog
-
-To share your GraphQL MCP server with the community:
-
-1. Prepare your server:
-
-   - Ensure it follows MCP best practices
-   - Add comprehensive documentation
-   - Test thoroughly with multiple GraphQL APIs
-
-2. Submit to Docker MCP Registry:
-
-   - Visit [github.com/docker/mcp-registry](https://github.com/docker/mcp-registry)
-   - Follow the submission guidelines
-   - Choose Docker-built (recommended) or community-built tier
-
-3. Benefits of publishing:
-
-   - Automatic security scanning and signing
-   - Distribution through Docker Hub
-   - Discovery in Docker MCP Catalog
-   - Access to millions of developers
-
-## More resources
-
-- Docker MCP documentation: [docs.docker.com/ai/mcp-catalog-and-toolkit/](https://docs.docker.com/ai/mcp-catalog-and-toolkit/)
-- MCP specification: [spec.modelcontextprotocol.io](https://spec.modelcontextprotocol.io/)
-- Docker Community: [forums.docker.com](https://forums.docker.com)
+- [Docker MCP gateway](https://github.com/docker/mcp-gateway): Run and manage MCP servers
+- [MCP registry](https://github.com/docker/mcp-registry): Share your GraphQL servers with the community
+- [Contributing guide](https://github.com/docker/mcp-registry/blob/main/CONTRIBUTING.md): Submit your server to the registry
+- [MCP specification](https://spec.modelcontextprotocol.io): Protocol details
+- [Docker MCP catalog](https://hub.docker.com/mcp): Browse available servers
+- [MCP toolkit docs](https://docs.docker.com/ai/mcp-catalog-and-toolkit/): Docker Desktop integration
+- [GitHub issues](https://github.com/docker/mcp-gateway/issues): Report bugs or request features
+- [Docker community](https://forums.docker.com): Ask questions and share experiences

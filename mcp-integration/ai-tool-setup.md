@@ -12,12 +12,12 @@ and development tools to enable intelligent interactions with your GraphQL API.
 - [Cursor editor](#cursor-editor)
 - [Continue.dev extension](#continuedev-extension)
 - [Custom MCP client integration](#custom-mcp-client-integration)
-- [Testing Your AI tool integration](#testing-your-ai-tool-integration)
+- [Test your AI tool integration](#test-your-ai-tool-integration)
 
 ## Prerequisites
 
 - Completed GraphQL MCP server from the [basic server guide](basic-server.md)
-- Built and tested server: `npm run build` and verified it starts without errors
+- Built and tested server
 - AI client software
 
 ## Overview
@@ -293,7 +293,7 @@ serverProcess.kill();
 </html>
 ```
 
-## Testing Your AI tool integration
+## Test your AI tool integration
 
 ### Functional tests
 
@@ -325,11 +325,13 @@ Error scenarios:
 ### Performance tests
 
 Response times:
+
 - Measure schema introspection time
 - Test query execution performance
 - Monitor memory usage during long conversations
 
 Concurrent usage:
+
 - Test multiple AI clients using the same MCP server
 - Verify no conflicts or race conditions
 - Check resource usage under load

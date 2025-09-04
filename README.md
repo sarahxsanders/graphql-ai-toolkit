@@ -6,7 +6,9 @@ _A practical toolkit for designing GraphQL APIs, documentation, and developer to
 - [Documentation templates](documentation-templates.md)
 - [Error message examples](error-message-examples.md)
 - [Query examples](query-examples.md)
-- [MCP integration guide](mcp-integration/basic-server.md)
+- [MCP guide: Basic server](mcp-integration/basic-server.md)
+- [MCP guide: Docker setup](mcp-integration/docker-setup.md)
+- [MCP guide: AI tool setup](mcp-integration/ai-tool-setup.md)
 
 ## The methodology
 
